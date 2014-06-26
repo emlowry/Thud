@@ -1,0 +1,33 @@
+﻿<Window x:Class="ThudPrototype.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ThudPrototype"
+        Title="MainWindow" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <RoutedUICommand x:Key="NewGame" Text="New Game" />
+        <RoutedUICommand x:Key="Quit" Text="Quit" />
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="{StaticResource NewGame}" />
+        <KeyBinding Key="Q" Modifiers="Control" Command="{StaticResource Quit}" />
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource NewGame}" Executed="CommandBindingNewGame_Executed" />
+        <CommandBinding Command="{StaticResource Quit}" Executed="CommandBindingQuit_Executed" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23" MinHeight="23" />
+            <RowDefinition Height="768" MinHeight="768" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="768" MinWidth="768" />
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="_New Game" Command="{StaticResource NewGame}" InputGestureText="Ctrl+N" />
+            <MenuItem Header="_Quit" Command="{StaticResource Quit}" InputGestureText="Ctrl+Q" />
+        </Menu>
+        <Grid x:Name="gameBoard" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              Background="Black" local:ThudTile.PlayerChanged="PlayerChangedHandler" />
+    </Grid>
+</Window>
